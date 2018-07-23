@@ -25,15 +25,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+           [
+               'attribute'=> 'id',
+               'contentOptions'=>['width'=>'30px']
+           ],
             'title',
-            'content:ntext',
+            //'content:ntext',
             'tags:ntext',
-            'status',
-            //'create_time:datetime',
-            //'update_time:datetime',
-            //'author_id',
-
+            [
+                'attribute'=>'status',
+                'value'=>'status0.name',
+                'filter'=>\common\models\Commentstatus::find()
+                    ->select('name,id')
+                    ->orderBy('position')
+                    ->indexBy('id')
+                    ->column()
+            ],
+            [
+                'attribute'=> 'create_time',
+                'format'=>['date','php:Y-m-d H:i:s']
+            ],
+            'update_time:datetime',
+            'author_id',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

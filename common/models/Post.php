@@ -59,6 +59,10 @@ class Post extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getStatus0(){
+        return $this->hasOne(Commentstatus::className(),['id'=>'status']);
+    }
+
     public function beforeSave($insert)
     {
         if(parent::beforeSave($insert)){
